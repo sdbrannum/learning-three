@@ -1,15 +1,16 @@
 import { WEBGL } from "three/examples/jsm/WebGL.js";
 
-import { cube, lines, aviator } from "./src/index";
+import { World, Cube, Lines, aviator } from "./src/index";
 
-checkWebGLCompatAndRun();
+(function() {
+    const worldElement = document.getElementById("world");
 
-function checkWebGLCompatAndRun(): void {
     if (WEBGL.isWebGLAvailable()) {
-        // Initiate function or other initializations here
-        aviator();
+        const world = new World(worldElement);
+        world.addScene("Line", new Lines());
+        world.addScene("Cube", new Cube());
     } else {
         const warning = WEBGL.getWebGLErrorMessage();
-        document.body.appendChild(warning);
+        worldElement.appendChild(warning);
     }
-}
+})();
