@@ -1,8 +1,15 @@
 # Learning Three
 
+![Deploy to GitHub Pages](https://github.com/sdbrannum/learning-three/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)
+
 Demos of three.js scenes, written in Typescript, from my learning
 
 ## Examples
+
+1. [Lines](#lines)
+2. [Cube](#cube)
+3. [Cube w/ Lights](#cube-w-lights)
+4. [Aviator](#aviator)
 
 ### Lines
 
