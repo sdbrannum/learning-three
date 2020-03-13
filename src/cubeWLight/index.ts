@@ -5,8 +5,8 @@ import IDisposable from "../interfaces/IDisposable";
 export default class CubeWLight extends WorldScene {
     cube: THREE.Mesh;
 
-    constructor(renderer: THREE.WebGLRenderer) {
-        super(renderer);
+    constructor() {
+        super();
 
         this.scene = new THREE.Scene();
         this.id = this.scene.id;
@@ -37,13 +37,15 @@ export default class CubeWLight extends WorldScene {
         this.resources = new Set<IDisposable>([geometry, material]);
     }
 
-    animate(): void {
+    animate(renderer: THREE.WebGLRenderer): void {
         this.cube.rotation.x += 0.01;
         this.cube.rotation.y += 0.01;
-        this.renderer.render(this.scene, this.camera);
+        renderer.render(this.scene, this.camera);
         this.animationId = requestAnimationFrame(
             // () => this.animate(renderer)
-            this.animate.bind(this)
+            this.animate.bind(this, renderer)
         );
     }
+    addEvents(): void {}
+    removeEvents(): void {}
 }

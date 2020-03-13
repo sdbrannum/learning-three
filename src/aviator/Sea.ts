@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import colors from "./colors";
 import { CylinderGeometry } from "three";
+import IDisposable from "../interfaces/IDisposable";
 
 interface Wave {
     y: number;
@@ -11,11 +12,12 @@ interface Wave {
     speed: number;
 }
 
-export default class Sea {
+export default class Sea implements IDisposable {
     geometry: THREE.CylinderGeometry;
     material: THREE.MeshPhongMaterial;
     mesh: THREE.Mesh;
     waves: Wave[];
+    resources: Set<IDisposable>;
 
     constructor() {
         // radius top, radius bottom, height, # of segments on radius, # of segments vertically
@@ -57,6 +59,9 @@ export default class Sea {
 
         // allow the sea to receive shadows
         this.mesh.receiveShadow = true;
+
+        // save ref to resources to dispose later
+        this.resources = new Set<IDisposable>([this.geometry, this.material]);
     }
 
     animateWaves(): void {
@@ -88,5 +93,12 @@ export default class Sea {
         (this.mesh.geometry as CylinderGeometry).verticesNeedUpdate = true;
 
         this.mesh.rotation.z += 0.005;
+    }
+
+    dispose(): void {
+        for (const resource of this.resources) {
+            resource.dispose();
+        }
+        this.resources.clear();
     }
 }

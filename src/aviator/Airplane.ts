@@ -1,16 +1,20 @@
 import * as THREE from "three";
 import colors from "./colors";
 import Pilot from "./Pilot";
+import IDisposable from "../interfaces/IDisposable";
 
-export default class Airplane {
+export default class Airplane implements IDisposable {
     mesh: THREE.Object3D;
     propeller: THREE.Mesh;
+    pilot: Pilot;
+    resources: Set<IDisposable>;
 
     constructor(pilot: Pilot) {
         this.mesh = new THREE.Object3D();
 
         // add pilot
-        this.mesh.add(pilot.mesh);
+        this.pilot = pilot;
+        this.mesh.add(this.pilot.mesh);
 
         // cabin
         const geomCockpit = new THREE.BoxGeometry(80, 50, 50, 1, 1, 1);
@@ -93,6 +97,21 @@ export default class Airplane {
         this.propeller.add(blade);
         this.propeller.position.set(50, 0, 0);
         this.mesh.add(this.propeller);
+
+        this.resources = new Set<IDisposable>([
+            geomCockpit,
+            matCockpit,
+            geomEngine,
+            matEngine,
+            geomTailPlane,
+            matTailPlane,
+            geomSideWing,
+            matSideWing,
+            geomPropeller,
+            matPropeller,
+            geomBlade,
+            matBlade
+        ]);
     }
 
     animate(x: number, y: number, propellerRotation: number): void {
@@ -104,5 +123,16 @@ export default class Airplane {
         this.mesh.rotation.x = (this.mesh.position.y - y) * 0.0064;
 
         this.propeller.rotation.x += propellerRotation;
+    }
+
+    dispose(): void {
+        // dispose of pilot
+        this.pilot.dispose();
+
+        // dispose of local resources
+        for (const resource of this.resources) {
+            resource.dispose();
+        }
+        this.resources.clear();
     }
 }

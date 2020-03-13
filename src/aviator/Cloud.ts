@@ -1,14 +1,16 @@
 import * as THREE from "three";
 import colors from "./colors";
+import IDisposable from "../interfaces/IDisposable";
 
 /**
  * Clouds are created by generating random number of
  * cubes and assembling them together
  */
-export default class Cloud {
+export default class Cloud implements IDisposable {
     geometry: THREE.BoxGeometry;
     material: THREE.MeshPhongMaterial;
     mesh: THREE.Object3D;
+    resources: Set<IDisposable>;
 
     constructor() {
         this.geometry = new THREE.BoxGeometry(20, 20, 20);
@@ -39,5 +41,15 @@ export default class Cloud {
 
             this.mesh.add(m);
         }
+
+        // save ref to dispose of
+        this.resources = new Set<IDisposable>([this.geometry, this.material]);
+    }
+
+    dispose(): void {
+        for (const resource of this.resources) {
+            resource.dispose();
+        }
+        this.resources.clear();
     }
 }

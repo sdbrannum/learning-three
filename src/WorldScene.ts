@@ -7,17 +7,14 @@ import IDisposable from "./interfaces/IDisposable";
  */
 export default abstract class WorldScene implements IScene {
     id: number;
-    renderer: THREE.WebGLRenderer;
     animationId: number;
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
     resources: Set<IDisposable>;
 
-    constructor(renderer: THREE.WebGLRenderer) {
-        this.renderer = renderer;
-    }
-
-    abstract animate(): void;
+    abstract animate(renderer: THREE.WebGLRenderer): void;
+    abstract addEvents(): void;
+    abstract removeEvents(): void;
 
     /** cancel animation and dispose of resources */
     dispose(): void {

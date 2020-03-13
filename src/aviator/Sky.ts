@@ -1,8 +1,10 @@
 import * as THREE from "three";
 import Cloud from "./Cloud";
+import IDisposable from "../interfaces/IDisposable";
 
-export default class Sky {
+export default class Sky implements IDisposable {
     mesh: THREE.Object3D;
+    clouds: Set<Cloud>;
 
     constructor(numOfClouds: number) {
         this.mesh = new THREE.Object3D();
@@ -11,6 +13,7 @@ export default class Sky {
         const stepAngle = (Math.PI * 2) / numOfClouds;
 
         // create the clouds
+        this.clouds = new Set<Cloud>();
         for (let i = 0; i < numOfClouds; i++) {
             const cloud = new Cloud();
 
@@ -35,6 +38,15 @@ export default class Sky {
 
             // do not forget to add the mesh of each cloud in the scene
             this.mesh.add(cloud.mesh);
+
+            this.clouds.add(cloud);
         }
+    }
+
+    dispose(): void {
+        for (const cloud of this.clouds) {
+            cloud.dispose();
+        }
+        this.clouds.clear();
     }
 }

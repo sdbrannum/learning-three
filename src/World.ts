@@ -14,8 +14,19 @@ export default class World {
     private _currentScene: IScene;
 
     constructor(canvasEl: HTMLCanvasElement) {
-        this.renderer = new WebGLRenderer({ canvas: canvasEl });
+        this.renderer = new WebGLRenderer({
+            canvas: canvasEl,
+            alpha: true,
+            antialias: true
+        });
         this.renderer.setSize(window.innerWidth, window.innerHeight, false);
+        // enable shadow rendering
+        this.renderer.shadowMap.enabled = true;
+        // high dpi
+        // this.renderer.setPixelRatio(
+        //     window.devicePixelRatio ? window.devicePixelRatio : 1
+        // );
+
         // scene selector
         this._sceneSelector = document.getElementById(
             "scene-selector"
@@ -35,6 +46,9 @@ export default class World {
      * @param scene
      */
     addScene(sceneName: string, scene: IScene): void {
+        if (scene.id === undefined) {
+            throw new Error("Scene missing id");
+        }
         this._scenes.push(scene);
         const option = this.generateOptionEl(scene.id, sceneName);
         this._sceneSelector.appendChild(option);
@@ -54,6 +68,7 @@ export default class World {
         // clean-up current resources
         this.renderer.clear();
         if (this._currentScene !== undefined) {
+            this._currentScene.removeEvents();
             this._currentScene.dispose();
         }
 
@@ -63,7 +78,8 @@ export default class World {
             this._currentScene.scene,
             this._currentScene.camera
         );
-        this._currentScene.animate();
+        this._currentScene.addEvents();
+        this._currentScene.animate(this.renderer);
     }
 
     /**

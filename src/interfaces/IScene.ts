@@ -7,6 +7,8 @@ export default interface IScene {
     camera: THREE.PerspectiveCamera;
     resources: Set<IDisposable>;
 
-    animate(): void;
+    animate(renderer: THREE.WebGLRenderer): void;
+    addEvents(): void;
+    removeEvents(): void;
     dispose(): void;
 }

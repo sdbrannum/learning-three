@@ -3,8 +3,8 @@ import IDisposable from "../interfaces/IDisposable";
 import WorldScene from "../WorldScene";
 
 export default class Lines extends WorldScene {
-    constructor(renderer: THREE.WebGLRenderer) {
-        super(renderer);
+    constructor() {
+        super();
 
         this.scene = new THREE.Scene();
         this.id = this.scene.id;
@@ -36,5 +36,7 @@ export default class Lines extends WorldScene {
         this.scene.add(line);
     }
 
-    animate(): void {}
+    animate(renderer: THREE.WebGLRenderer): void {}
+    addEvents(): void {}
+    removeEvents(): void {}
 }

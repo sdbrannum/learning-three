@@ -1,10 +1,12 @@
 import * as THREE from "three";
 import colors from "./colors";
+import IDisposable from "../interfaces/IDisposable";
 
-export default class Pilot {
+export default class Pilot implements IDisposable {
     mesh: THREE.Object3D;
     hairAngle: number;
     hairTop: THREE.Object3D;
+    resources: Set<IDisposable>;
 
     constructor() {
         this.mesh = new THREE.Object3D();
@@ -108,6 +110,22 @@ export default class Pilot {
         earR.position.set(0, 0, 6);
         this.mesh.add(earL);
         this.mesh.add(earR);
+
+        // save ref to resources to dispose later
+        this.resources = new Set<IDisposable>([
+            bodyGeometry,
+            bodyMaterial,
+            faceGeometry,
+            faceMaterial,
+            hairGeometry,
+            hairMaterial,
+            hairSideGeometry,
+            hairBackGeometry,
+            glassGeometry,
+            glassMaterial,
+            glassAGeometry,
+            earGeometry
+        ]);
     }
 
     animateHair(): void {
@@ -123,5 +141,12 @@ export default class Pilot {
         }
         // increment the angle for the next frame
         this.hairAngle += 0.16;
+    }
+
+    dispose(): void {
+        for (const resource of this.resources) {
+            resource.dispose();
+        }
+        this.resources.clear();
     }
 }
