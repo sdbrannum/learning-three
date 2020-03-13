@@ -1,8 +1,7 @@
 import IDisposable from "./IDisposable";
-import { WebGLRenderer } from "three";
+import * as THREE from "three";
 
-export default interface IScene {
-    id: number;
+export default interface IWorldScene {
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
     resources: Set<IDisposable>;

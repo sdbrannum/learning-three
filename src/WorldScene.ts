@@ -1,12 +1,11 @@
 import * as THREE from "three";
-import IScene from "./interfaces/IScene";
+import IWorldScene from "./interfaces/IWorldScene";
 import IDisposable from "./interfaces/IDisposable";
 
 /**
  * Base class of all scenes
  */
-export default abstract class WorldScene implements IScene {
-    id: number;
+export default abstract class WorldScene implements IWorldScene {
     animationId: number;
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;

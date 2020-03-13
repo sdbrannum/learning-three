@@ -13,10 +13,10 @@ import Airplane from "./src/aviator/Airplane";
     ) as HTMLCanvasElement;
 
     if (WEBGL.isWebGLAvailable()) {
-        const world = new World(canvasEl);
-        world.addScene("Line", new Lines());
-        world.addScene("Cube", new Cube());
-        world.addScene("Cube w/ Light", new CubeWLight());
+        const world = new World(worldEl);
+        world.addScene(new Lines());
+        world.addScene(new Cube());
+        world.addScene(new CubeWLight());
 
         const sea = new Sea();
         sea.mesh.position.y = -600;
@@ -31,7 +31,7 @@ import Airplane from "./src/aviator/Airplane";
         airplane.mesh.scale.set(0.25, 0.25, 0.25);
         airplane.mesh.position.y = 100;
 
-        world.addScene("Aviator", new Aviator(sea, sky, airplane));
+        world.addScene(new Aviator(sea, sky, airplane));
     } else {
         const warning = WEBGL.getWebGLErrorMessage();
         worldEl.appendChild(warning);

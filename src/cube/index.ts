@@ -7,8 +7,9 @@ export default class Cube extends WorldScene {
 
     constructor() {
         super();
+
         this.scene = new THREE.Scene();
-        this.id = this.scene.id;
+        this.scene.name = "cube";
 
         this.camera = new THREE.PerspectiveCamera(
             75, // FOV in degrees: extent of scene which is shown on screen

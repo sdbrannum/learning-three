@@ -7,7 +7,8 @@ export default class Lines extends WorldScene {
         super();
 
         this.scene = new THREE.Scene();
-        this.id = this.scene.id;
+        this.scene.name = "lines";
+
         this.camera = new THREE.PerspectiveCamera(
             45,
             window.innerWidth / window.innerHeight,

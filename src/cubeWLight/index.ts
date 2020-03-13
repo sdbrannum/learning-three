@@ -9,7 +9,7 @@ export default class CubeWLight extends WorldScene {
         super();
 
         this.scene = new THREE.Scene();
-        this.id = this.scene.id;
+        this.scene.name = "cubeWLight";
 
         this.camera = new THREE.PerspectiveCamera(
             75, // FOV in degrees: extent of scene which is shown on screen

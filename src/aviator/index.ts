@@ -17,7 +17,7 @@ export default class Aviator extends WorldScene {
         this.sky = sky;
         this.airplane = airplane;
         this.mousePosition = { x: 0, y: 0 };
-        this.id = this.createScene();
+        this.createScene();
         this.createLights();
     }
 
@@ -29,6 +29,7 @@ export default class Aviator extends WorldScene {
         const sceneWidth = window.innerWidth;
 
         this.scene = new THREE.Scene();
+        this.scene.name = "aviator";
 
         // fog effect
         this.scene.fog = new THREE.Fog(0xf7d9aa, 100, 950);
