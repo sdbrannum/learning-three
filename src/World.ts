@@ -8,19 +8,14 @@ import IScene from "./interfaces/IScene";
  * * calling dispose methods
  */
 export default class World {
-    domElement: HTMLElement;
     renderer: WebGLRenderer;
     private _sceneSelector: HTMLSelectElement;
     private _scenes: IScene[] = [];
     private _currentScene: IScene;
 
-    constructor(domElement: HTMLElement) {
-        this.domElement = domElement;
-        this.renderer = new WebGLRenderer();
+    constructor(canvasEl: HTMLCanvasElement) {
+        this.renderer = new WebGLRenderer({ canvas: canvasEl });
         this.renderer.setSize(window.innerWidth, window.innerHeight, false);
-        // add canvas element to dom
-        this.domElement.appendChild(this.renderer.domElement);
-
         // scene selector
         this._sceneSelector = document.getElementById(
             "scene-selector"
@@ -68,7 +63,7 @@ export default class World {
             this._currentScene.scene,
             this._currentScene.camera
         );
-        this._currentScene.animate(this.renderer);
+        this._currentScene.animate();
     }
 
     /**

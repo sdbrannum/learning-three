@@ -3,8 +3,8 @@ import IDisposable from "../interfaces/IDisposable";
 import WorldScene from "../WorldScene";
 
 export default class Lines extends WorldScene {
-    constructor() {
-        super();
+    constructor(renderer: THREE.WebGLRenderer) {
+        super(renderer);
 
         this.scene = new THREE.Scene();
         this.id = this.scene.id;
