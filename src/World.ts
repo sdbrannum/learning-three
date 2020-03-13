@@ -17,7 +17,7 @@ export default class World {
     constructor(domElement: HTMLElement) {
         this.domElement = domElement;
         this.renderer = new WebGLRenderer();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(window.innerWidth, window.innerHeight, false);
         // add canvas element to dom
         this.domElement.appendChild(this.renderer.domElement);
 
@@ -30,6 +30,8 @@ export default class World {
             "change",
             this.onSceneSelectorChange.bind(this)
         );
+
+        window.addEventListener("resize", this.onWindowResize);
     }
 
     /**
@@ -76,6 +78,16 @@ export default class World {
     onSceneSelectorChange(evt: Event): void {
         const sceneId = (evt.currentTarget as HTMLSelectElement).value;
         this.changeScene(+sceneId);
+    }
+
+    onWindowResize(evt: Event): void {
+        if (this._currentScene !== undefined) {
+            this.renderer.setSize(window.innerWidth, window.innerHeight, false);
+            const canvas = this.renderer.domElement;
+            this._currentScene.camera.aspect =
+                canvas.clientWidth / canvas.clientHeight;
+            this._currentScene.camera.updateProjectionMatrix();
+        }
     }
 
     /**

@@ -33,9 +33,13 @@ export default class Cube extends WorldScene {
     animate(renderer: THREE.WebGLRenderer): void {
         this.cube.rotation.x += 0.01;
         this.cube.rotation.y += 0.01;
+
         renderer.render(this.scene, this.camera);
+
+        // save animation loop id so we can cancel it
         this.animationId = requestAnimationFrame(
-            this.animate.bind(this, renderer)
+            () => this.animate(renderer)
+            // this.animate.bind(this, renderer)
         );
     }
 }

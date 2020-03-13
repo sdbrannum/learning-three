@@ -41,6 +41,7 @@ export default class CubeWLight extends WorldScene {
         this.cube.rotation.y += 0.01;
         renderer.render(this.scene, this.camera);
         this.animationId = requestAnimationFrame(
+            // () => this.animate(renderer)
             this.animate.bind(this, renderer)
         );
     }

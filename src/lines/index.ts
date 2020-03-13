@@ -34,8 +34,6 @@ export default class Lines extends WorldScene {
 
         // add to scene
         this.scene.add(line);
-
-        super();
     }
 
     animate(): void {}

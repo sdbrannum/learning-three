@@ -179,7 +179,7 @@ export default class Aviator {
         this.sea.mesh.rotation.z += 0.005;
         this.sky.mesh.rotation.z += 0.01;
 
-        // update airplaine
+        // update airplane
         const targetX = this.rescale(
             this.mousePosition.x,
             -0.75,
