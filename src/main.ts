@@ -1,10 +1,10 @@
 import { WEBGL } from "three/examples/jsm/WebGL.js";
 
-import { World, Cube, Lines, Aviator, CubeWLight } from "./src/index";
-import Sea from "./src/aviator/Sea";
-import Sky from "./src/aviator/Sky";
-import Pilot from "./src/aviator/Pilot";
-import Airplane from "./src/aviator/Airplane";
+import { World, Cube, Lines, Aviator, CubeWLight } from "./index";
+import Sea from "./aviator/Sea";
+import Sky from "./aviator/Sky";
+import Pilot from "./aviator/Pilot";
+import Airplane from "./aviator/Airplane";
 
 (function() {
     const worldEl = document.getElementById("world");

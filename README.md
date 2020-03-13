@@ -18,9 +18,9 @@ A cube with rotating animation
 
 ### Cube w Lights
 
-[Reference 1][https://threejs.org/docs/index.html#manual/en/introduction/creating-a-scene], [Reference 2](https://threejsfundamentals.org/threejs/lessons/threejs-fundamentals.html)
+[Reference 1](https://threejs.org/docs/index.html#manual/en/introduction/creating-a-scene), [Reference 2](https://threejsfundamentals.org/threejs/lessons/threejs-fundamentals.html)
 
-A cube with rotation animation and lights
+A cube with rotating animation and lights
 
 ### Aviator
 
