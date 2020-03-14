@@ -15,11 +15,14 @@ export default class World {
     private _scenes: IWorldScene[] = [];
     private _currentScene: IWorldScene;
 
-    constructor(worldDomEl: HTMLElement) {
+    /**
+     *
+     * @param worldDomEl the container for the entire app/world
+     * @param canvasDomEl the canvas element to render scenes upon
+     */
+    constructor(worldDomEl: HTMLElement, canvasDomEl: HTMLCanvasElement) {
         this.worldDomEl = worldDomEl;
-        this.canvasDomEl = this.worldDomEl.querySelector(
-            "#world-canvas"
-        ) as HTMLCanvasElement;
+        this.canvasDomEl = canvasDomEl;
 
         this.renderer = new WebGLRenderer({
             canvas: this.canvasDomEl,

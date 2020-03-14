@@ -9,7 +9,8 @@ Demos of three.js scenes, written in Typescript, from my learning
 1. [Lines](#lines)
 2. [Cube](#cube)
 3. [Cube w/ Lights](#cube-w-lights)
-4. [Aviator](#aviator)
+4. [Text](#text)
+5. [Aviator](#aviator)
 
 ### Lines
 
@@ -28,6 +29,12 @@ A cube with rotating animation
 [Reference 1](https://threejs.org/docs/index.html#manual/en/introduction/creating-a-scene), [Reference 2](https://threejsfundamentals.org/threejs/lessons/threejs-fundamentals.html)
 
 A cube with rotating animation and lights
+
+### Text
+
+[Reference 1](https://threejs.org/docs/index.html#api/en/geometries/TextGeometry), [Reference 2](https://threejsfundamentals.org/threejs/lessons/threejs-primitives.html)
+
+Text rendered in the canvas
 
 ### Aviator
 

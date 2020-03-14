@@ -1,6 +1,6 @@
 import { WEBGL } from "three/examples/jsm/WebGL.js";
 
-import { World, Cube, Lines, Aviator, CubeWLight } from "./index";
+import { World, Lines, Cube, CubeWLight, Text, Aviator } from "./index";
 import Sea from "./aviator/Sea";
 import Sky from "./aviator/Sky";
 import Pilot from "./aviator/Pilot";
@@ -13,10 +13,11 @@ import Airplane from "./aviator/Airplane";
     ) as HTMLCanvasElement;
 
     if (WEBGL.isWebGLAvailable()) {
-        const world = new World(worldEl);
+        const world = new World(worldEl, canvasEl);
         world.addScene(new Lines());
         world.addScene(new Cube());
         world.addScene(new CubeWLight());
+        world.addScene(new Text());
 
         const sea = new Sea();
         sea.mesh.position.y = -600;
